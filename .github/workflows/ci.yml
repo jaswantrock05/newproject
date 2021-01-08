@@ -30,6 +30,7 @@ jobs:
       with:
         repository: jaswantrock05/demo-app
         auto_tag: true
+        allow_pull_request: true  
         registry: docker.pkg.github.com  
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
