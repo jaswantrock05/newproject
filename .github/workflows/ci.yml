@@ -28,13 +28,11 @@ jobs:
     - name: Build and Push Docker Image
       uses: docker/build-push-action@v1
       with:
+        image: jaswantrock05/demo-app
+        registry: docker.io  
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: jaswantrock05/demo-app
-        tag_with_ref: true
-        add_git_labels: true
-        build_args: MAKE_TARGET=build
-        push: ${{ startsWith(github.ref, 'refs/tags/') }}
+     
         
         
       
