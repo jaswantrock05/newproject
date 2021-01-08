@@ -33,6 +33,11 @@ jobs:
         registry: docker.pkg.github.com  
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+    - id: deploy
+      env:
+        NEW_VERSION: ${{ steps.build.outputs.tag }}
+      run: |
+        docker pull $NEW_VERSION  
      
         
         
