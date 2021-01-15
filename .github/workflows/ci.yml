@@ -1,22 +1,19 @@
-name: Awesome Action
-
+name: My workflow
 on: push
-
 jobs:
-  awesome:
-    name: Awesome Action
+  do-something:
     runs-on: ubuntu-latest
     steps:
-      # checkout this repo
-      - name: Checkout Repo
+      - uses: actions/checkout@v2
+      - name: Checkout jaswantrock05/workshop-hello-gitops
         uses: actions/checkout@v2
-      # checkout the private repo containing the action to run
-      - name: Checkout GitHub Action Repo
-        uses: actions/checkout@v1
         with:
-          repository: jaswantrock05/workshop-hello-gitops  
-          #ref: v0.1.2
-          token: ${{ secrets.GITHUB_TOKEN }} # stored in GitHub secrets
-          #path: .github/actions/my-action
-     # - name: Run My Action
-     #   uses: ./.github/actions/my-action
+          repository: jaswantrock05/workshop-hello-gitops
+          ref: refs/heads/master
+          # GitHub's personal access token with access to `my-organization/awesome-action`
+          token: $
+          persist-credentials: false
+          path: ./.github/actions/awesome-action
+      - uses: ./.github/actions/awesome-action
+      - name: Last step
+        run: ...
