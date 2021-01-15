@@ -9,7 +9,7 @@ on:
   pull_request:
     branches: [ main ]
   paths:
-      - 'src/**/VERSION'
+    - 'src/**/VERSION'
 
 jobs:
   build:
