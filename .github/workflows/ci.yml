@@ -12,9 +12,9 @@ jobs:
         uses: actions/checkout@v2
       # checkout the private repo containing the action to run
       - name: Checkout GitHub Action Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v1
         with:
-          repository:   jaswantrock05/workshop-hello-gitops  
+          repository: jaswantrock05/workshop-hello-gitops  
           #ref: v0.1.2
           token: ${{ secrets.GITHUB_TOKEN }} # stored in GitHub secrets
           #path: .github/actions/my-action
