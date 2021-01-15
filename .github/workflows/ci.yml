@@ -1,22 +1,20 @@
-name: Awesome Action
+name: CI
 
 on: [push]
 
 jobs:
-  awesome:
-    name: Awesome Action
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-      # checkout this repo
-      - name: Checkout Repo
-        uses: actions/checkout@v2
-      # checkout the private repo containing the action to run
-      - name: Checkout GitHub Action Repo
-        uses: actions/checkout@v2
-        with:
-          repository:  jaswantrock05/workshop-hello-gitops 
-          #ref: v0.1.2
-          token: ${{ secrets.DOCKER_PASSWORD }} # stored in GitHub secrets
-          path: .github/actions/my-action
-      - name: Run My Action
-        uses: ./.github/actions/my-action
+    - uses: actions/checkout@v2-beta
+      with:
+        # Private version of https://github.com/actions/hello-world-docker-action
+        repository:  jaswantrock05/workshop-hello-gitops 
+        ref: refs/tags/v1
+        token: ${{ secrets.GITHUB_TOKEN }} # `GitHub_PAT` is a secret that contains your PAT to clone that private repo
+    - name: Run the private action
+      uses: ./
+      with:
+        who-to-greet: "Mona the Octocat"
