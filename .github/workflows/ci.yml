@@ -1,22 +1,28 @@
-name: Awesome Action
-
-on: push
+name: commitfiles
+on: [push]
 
 jobs:
-  awesome:
-    name: Awesome Action
-    runs-on: ubuntu-latest
+  job1:
+    runs-on: [ubuntu-latest]
     steps:
-      # checkout this repo
-      - name: Checkout Repo
+      - name: checkout
         uses: actions/checkout@v2
-      # checkout the private repo containing the action to run
-      - name: Checkout GitHub Action Repo
-        uses: actions/checkout@v2
+      - name: Modify value # Tried to modify the files based on existing testfile.txt
+        run: |
+          echo 'Add value2' >> testfile.txt
+      - name: move to dir # Move the generated files into output folder
+        run: |
+          mkdir -p output
+          yes| cp -rf testfile.txt ./output/
+      - name: Commit files # commit the output folder
+        run: |
+          git config --local user.email "jaswantrock05@gmail.com"
+          git config --local user.name "jaswantrock05"
+          git add ./output
+          git commit -m "Add changes"
+      - name: Push changes # push the output folder to your repo
+        uses: ad-m/github-push-action@master
         with:
-          repository: jaswantrock05/workshop-hello-gitops 
-          #ref: v0.1.2
-          token: ${{ secrets.WORKSHOP_PASSWORD }} # stored in GitHub secrets
-          path: .github/actions/my-action
-      - name: Run My Action
-        uses: ./.github/actions/my-action
+          branch: samson #ignore if your branch is master
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
