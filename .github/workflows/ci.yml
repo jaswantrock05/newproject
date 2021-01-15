@@ -14,7 +14,7 @@ jobs:
       - name: Checkout GitHub Action Repo
         uses: actions/checkout@v2
         with:
-          repository:  jaswantrock05/javaproject 
+          repository:  jaswantrock05/workshop-hello-gitops 
           #ref: v0.1.2
           token: ${{ secrets.GITHUB_TOKEN }} # stored in GitHub secrets
           path: .github/actions/my-action
