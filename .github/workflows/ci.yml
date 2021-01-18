@@ -1,28 +1,20 @@
-name: commitfiles
+name: CI
+
 on: [push]
 
 jobs:
-  job1:
-    runs-on: [ubuntu-latest]
+  build:
+
+    runs-on: ubuntu-latest
+
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
-      - name: Modify value # Tried to modify the files based on existing testfile.txt
-        run: |
-          echo 'Add value2' >> testfile.txt
-      - name: move to dir # Move the generated files into output folder
-        run: |
-          mkdir -p output
-          yes| cp -rf testfile.txt ./output/
-      - name: Commit files # commit the output folder
-        run: |
-          git config --local user.email "jaswantrock05@gmail.com"
-          git config --local user.name "jaswantrock05"
-          git add ./output
-          git commit -m "Add changes"
-      - name: Push changes # push the output folder to your repo
-        uses: ad-m/github-push-action@master
-        with:
-          branch: samson #ignore if your branch is master
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force: true
+    - uses: actions/checkout@v2-beta
+      with:
+        # Private version of https://github.com/actions/hello-world-docker-action
+        repository:  jaswantrock05/workshop-hello-gitops 
+        #ref: refs/tags/v1
+        token: ${{ secrets.GITHUB_TOKEN }} # `GitHub_PAT` is a secret that contains your PAT to clone that private repo
+    - name: Run the private action
+      uses: ./
+      with:
+        who-to-greet: "Mona the Octocat"
