@@ -5,8 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
-    - name: Grant execute permission for goodbye.sh
-      run: chmod +x goodbye.sh
     - uses: actions/checkout@v2
     - id: foo
       uses:  jaswantrock05/newproject@v2
