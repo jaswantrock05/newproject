@@ -43,8 +43,8 @@ jobs:
       uses: jacobtomlinson/gha-find-replace@master
       with:
         repository: jaswantrock05/workshop-hello-gitops   
-        find: "v1.18.3"
-        replace: "v1.18.4"
+        find: ${{ secrets.Existing_TAG_VALUE }}
+        replace: ${{ secrets.TAG_VALUE }}
         include: "app-deployment.yaml" # Will match all README.md files in any nested directory
     - name: Commit files
       run: |
