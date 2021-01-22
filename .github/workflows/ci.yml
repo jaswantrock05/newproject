@@ -8,13 +8,14 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
         
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v1.1.0
+    - name: Build and Push Docker Image
+      uses: mr-smithers-excellent/docker-build-push@v5
       with:
+        image: jaswantrock05/demo-app
+        tag: latest-${{ env.VERSION }}
+        registry: docker.io  
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: ${{ secrets.DOCKER_USERNAME }}/hello-gitops
-        tags: ${{ github.sha }}, latest
 
   deploy:
     name: Deploy
@@ -34,7 +35,7 @@ jobs:
       uses: ./.github/actions/replace
       with:
         files: app-deployment.yaml
-        replacements: '$IMAGE=${{ github.sha }}, latest'		
+        replacements: '$IMAGE=$latest-${{ env.VERSION }}'		
     - name: Commit files
       run: |
         git config --local user.email "jaswantrock05@gmail.com"
