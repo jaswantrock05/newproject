@@ -45,3 +45,4 @@ jobs:
       with:
 	branch: B77
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
