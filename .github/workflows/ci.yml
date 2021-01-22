@@ -39,11 +39,12 @@ jobs:
         repository: jaswantrock05/workshop-hello-gitops 
         #ref: v0.1.2
         token: ${{ secrets.token }} # stored in GitHub secrets
-    - name: Replace image in config
-      uses: ./.github/actions/replace
+    - name: Find and Replace
+      uses: jacobtomlinson/gha-find-replace@master
       with:
-        files: app-deployment.yaml
-        replacements: '$IMAGE=${{ secrets.TAG_VALUE }}'		
+        find: "v1.18.3"
+        replace: "v1.18.4"
+        include: "app-deployment.yaml" # Will match all README.md files in any nested directory
     - name: Commit files
       run: |
         git config --local user.email "jaswantrock05@gmail.com"
