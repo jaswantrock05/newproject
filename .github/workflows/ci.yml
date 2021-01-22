@@ -1,14 +1,22 @@
-on: [push]
+name: Awesome Action
+
+on: push
 
 jobs:
-  hello_world_job:
+  awesome:
+    name: Awesome Action
     runs-on: ubuntu-latest
-    name: A job to say hello
     steps:
-    - uses: actions/checkout@v2
-    - id: foo
-      uses:  jaswantrock05/newproject@v3
-      with:
-        who-to-greet: 'Mona the Octocat'
-    - run: echo random-number ${{ steps.foo.outputs.random-number }} 
-      shell: bash
+      # checkout this repo
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      # checkout the private repo containing the action to run
+      - name: Checkout GitHub Action Repo
+        uses: actions/checkout@v2
+        with:
+          repository: jaswantrock05/workshop-hello-gitops 
+          #ref: v0.1.2
+          token: ${{ secrets.token }} # stored in GitHub secrets
+          path: .github/actions/my-action
+      - name: Run My Action
+        uses: ./.github/actions/my-action
