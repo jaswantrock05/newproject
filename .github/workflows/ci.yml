@@ -24,22 +24,19 @@ jobs:
     steps:
     - name: Check out code
       uses: actions/checkout@v2
-	  
-	 // need to update the code using composite 
-	    ??????
     - name: Checkout GitHub Action Repo
       uses: actions/checkout@v2
       with:
         repository: jaswantrock05/workshop-hello-gitops 
         #ref: v0.1.2
         token: ${{ secrets.token }} # stored in GitHub secrets
-	- name: Replace image in config
+    - name: Replace image in config
       uses: ./.github/actions/replace
       with:
         files: app-deployment.yaml
         replacements: '$IMAGE=${{ github.sha }}, latest	
 		
-	- name: Commit files
+    - name: Commit files
       run: |
         git config --local user.email "jaswantrock05@gmail.com"
         git config --local user.name "jaswantrock05"
