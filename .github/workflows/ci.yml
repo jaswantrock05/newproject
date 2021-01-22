@@ -54,6 +54,7 @@ jobs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        branch: B77
+        repository: jaswantrock05/workshop-hello-gitops  
+        branch: B778
         github_token: ${{ secrets.GITHUB_TOKEN }}
         force: true
