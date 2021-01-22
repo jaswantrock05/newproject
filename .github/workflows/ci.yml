@@ -17,6 +17,6 @@ jobs:
           repository: jaswantrock05/workshop-hello-gitops 
           #ref: v0.1.2
           token: ${{ secrets.token }} # stored in GitHub secrets
-          path: .github/actions/my-action
+          path: .github/src
       - name: Run My Action
-        uses: ./.github/actions/my-action
+        uses: ./.github/src
