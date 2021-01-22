@@ -20,7 +20,7 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
         image: jaswantrock05/demo-app
-        tags: ${{ secrets.TAG_VALUE }}
+        tags: ${{ secrets.NEW_TAG_VALUE }}
         registry: docker.io  
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
@@ -44,7 +44,7 @@ jobs:
       with:
         repository: jaswantrock05/workshop-hello-gitops   
         find: ${{ secrets.Existing_TAG_VALUE }}
-        replace: ${{ secrets.TAG_VALUE }}
+        replace: ${{ secrets.NEW_TAG_VALUE }}
         include: "app-deployment.yaml" # Will match all README.md files in any nested directory
     - name: Commit files
       run: |
