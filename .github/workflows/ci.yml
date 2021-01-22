@@ -34,7 +34,7 @@ jobs:
       uses: ./.github/actions/replace
       with:
         files: app-deployment.yaml
-        replacements: '$IMAGE=${{ github.sha }}, latest			
+        replacements: '$IMAGE=${{ github.sha }}, latest'		
     - name: Commit files
       run: |
         git config --local user.email "jaswantrock05@gmail.com"
@@ -43,6 +43,6 @@ jobs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-	branch: B77
+        branch: B77
         github_token: ${{ secrets.GITHUB_TOKEN }}
         force: true
