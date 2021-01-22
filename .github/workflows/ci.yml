@@ -12,7 +12,7 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
         image: jaswantrock05/demo-app
-        tag: latest-${{ env.VERSION }}
+        tag: ${{ secrets.TAG_VALUE }}
         registry: docker.io  
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
@@ -35,7 +35,7 @@ jobs:
       uses: ./.github/actions/replace
       with:
         files: app-deployment.yaml
-        replacements: '$IMAGE=$latest-${{ env.VERSION }}'		
+        replacements: '$IMAGE=${{ secrets.TAG_VALUE }}'		
     - name: Commit files
       run: |
         git config --local user.email "jaswantrock05@gmail.com"
